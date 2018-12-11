@@ -13,5 +13,8 @@
 			"notes": "- Fix color issue on Comments Panel.\n- Improved Support for the Emoji Panel.\n- Fix SVGs color bug on Windows.\n- Improved color for texts on selected input field"
 		}
 	],
+	"images": [
+		"https://papertiger.github.io/figma-dark-ui/screenshots/cover.jpg"
+	],
 	"css": ["https://papertiger.github.io/figma-dark-ui/dist/css/style.css"]
 }
