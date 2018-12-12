@@ -16,5 +16,5 @@
 	"images": [
 		"https://papertiger.github.io/figma-dark-ui/screenshots/cover.jpg"
 	],
-	"css": ["https://papertiger.github.io/figma-dark-ui/dist/css/style.css"]
+	"js": ["https://papertiger.github.io/figma-dark-ui/dist/app.js"]
 }
