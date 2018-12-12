@@ -6,6 +6,10 @@ import css from '../css/style.css';
 // MAKE CODE MORE COMPACT (CASE COMPACTED)
 // BOTTOM BORDER ON PAGE ACCORDIN PANEL
 
+
+// Figma Panel Code HERE?
+
+
 export function toggleDarkUI() {
     const palette = {
         bgLightest: '#676C70',

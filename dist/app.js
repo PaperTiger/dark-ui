@@ -193,6 +193,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ALIGN THOSE TO THE ONE USED BY FIGMA
 // MAKE CODE MORE COMPACT (CASE COMPACTED)
 // BOTTOM BORDER ON PAGE ACCORDIN PANEL
+// Figma Panel Code HERE?
 function toggleDarkUI() {
   var palette = {
     bgLightest: '#676C70',
