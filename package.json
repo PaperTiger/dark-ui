@@ -1,6 +1,61 @@
 {
-  "name": "figma-dark-ui",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/PaperTiger/figma-dark-ui.git"
+  "name": "figma-dark-ui-plugin",
+  "version": "0.0.1",
+  "description": "A sleek and beautiful revamp of the existing UI to help you work in low-light condition.",
+  "repository": "https://github.com/cdes/figma-dark-mode",
+  "author": "Mirko Santangelo, Ahmad Al Haddad <haddad@ah.sa>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/plugin-transform-classes": "^7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/plugin-transform-shorthand-properties": "^7.2.0",
+    "@babel/plugin-transform-spread": "^7.2.2",
+    "@babel/plugin-transform-template-literals": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.1.0",
+    "boxen": "^2.1.0",
+    "chalk": "^2.4.2",
+    "jest": "^24.1.0",
+    "nodejs-fs-utils": "^1.1.2",
+    "prettier": "^1.16.4",
+    "regenerator-runtime": "^0.13.1",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-run": "^1.1.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.2"
+  },
+  "peerDependencies": {
+    "babel-core": "6.x || ^7.0.0-bridge.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prebuild": "prettier --write src/**",
+    "serve": "rollup -cwm",
+    "start": "rollup -cwm  --environment RUN",
+    "test": "jest --config jest.config.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "browserslist": [
+    "chrome >= 49",
+    "firefox >= 45",
+    "safari >=10.1",
+    "edge >= 14"
+  ]
 }

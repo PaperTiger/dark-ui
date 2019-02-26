@@ -1,20 +1,12 @@
 {
-	"id": "dark-ui",
-	"name": "Dark UI",
-	"version": "2.0.1",
-	"author": "Mirko Santangelo, Paper Tiger",
-	"github": "https://github.com/PaperTiger/figma-dark-ui",
-	"description": "Enable Dark UI Mode for Figma",
-	"instructions": "Toggle the Dark UI Mode by going Plugins > Dark UI > Toggle Dark Mode",
-	"updates": [
-		{
-			"version": "2.0.1",
-			"date": "9/11/2018",
-			"notes": "- Fix color issue on Comments Panel.\n- Improved Support for the Emoji Panel.\n- Fix SVGs color bug on Windows.\n- Improved color for texts on selected input field"
-		}
-	],
-	"images": [
-		"https://papertiger.github.io/figma-dark-ui/screenshots/cover.jpg"
-	],
-	"js": ["https://papertiger.github.io/figma-dark-ui/dist/app.js"]
+	"name": "Dark Mode",
+	"id": "figma-dark-ui-plugin",
+	"version": "0.0.1",
+	"author": "Mirko Santangelo & Ahmad Al Haddad",
+	"github": "https://github.com/cdes/figma-dark-ui",
+  "description": "A sleek and beautiful revamp of the existing UI to help you work in low-light condition.",
+	"instructions": "1. Browse Plugins menu 2. Click 'Toggle Dark UI'",
+	"js": [
+		"dist/figma-dark-ui-plugin.js"
+  ]
 }
