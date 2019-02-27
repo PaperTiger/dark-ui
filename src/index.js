@@ -7,6 +7,10 @@ const css = `
   color: white;
 }
 
+.svg-container {
+	fill: white;
+}
+
 [class*="pageContent-"] {
   background: #2a2d2d;
   color: #c1c5c9;
@@ -166,8 +170,8 @@ screen and (min-resolution: 2dppx) {
   background: #212325;
 }
 
-[class*="sidebar--searchBox"] input::placeholder {
-  color: #333536;
+input[type=text]::placeholder {
+  color: #676C70;
 }
 
 [class*="file_tile--settings"] {
