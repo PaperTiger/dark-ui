@@ -160,6 +160,19 @@ screen and (min-resolution: 2dppx) {
 [class*="object_row--selected"] [class*="object_row--input"] {
   color: #333536;
 }
+
+
+[class*="sidebar--searchBox"] {
+  background: #212325;
+}
+
+[class*="sidebar--searchBox"] input::placeholder {
+  color: #333536;
+}
+
+[class*="file_tile--settings"] {
+  opacity: 1;
+}
 `;
 
 export default class DarkUIPlugin {
@@ -204,18 +217,6 @@ export default class DarkUIPlugin {
       setTheme();
 
       document.head.appendChild(style);
-
-      window.App.sendMessage("clearSelection");
-      window.App.updateSelectionProperties({
-        backgroundColor: {
-          r: 0.2,
-          g: 0.20784313725490197,
-          b: 0.21176470588235294,
-          a: 1
-        },
-        backgroundEnabled: true
-      });
-
       localStorage.setItem("figma-dark-ui-plugin-enabled", true);
     } else {
       if (
@@ -224,19 +225,7 @@ export default class DarkUIPlugin {
         )
       ) {
         localStorage.removeItem("figma-dark-ui-plugin-enabled");
-        window.App.sendMessage("clearSelection");
-        window.App.updateSelectionProperties({
-          backgroundColor: {
-            r: 0.8980392156862745,
-            g: 0.8980392156862745,
-            b: 0.8980392156862745,
-            a: 1
-          },
-          backgroundEnabled: true
-        });
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
+        setTimeout(() => {}, 1000);
       }
     }
 
