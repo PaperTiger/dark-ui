@@ -1,11 +1,11 @@
 {
 	"name": "Dark Mode",
 	"id": "figma-dark-ui-plugin",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"author": "Mirko Santangelo & Ahmad Al Haddad",
 	"github": "https://github.com/cdes/figma-dark-ui",
   "description": "A sleek and beautiful revamp of the existing UI to help you work in low-light condition.",
-	"instructions": "1. Browse Plugins menu 2. Click 'Toggle Dark UI'",
+	"instructions": "1. Browse Plugins menu 2. Click 'Toggle Dark Mode'",
 	"js": [
 		"dist/figma-dark-ui-plugin.js"
 	],
