@@ -17,7 +17,7 @@
 </ul>
 
 <h3>How to install</h3>
-<p>Figma Dark UI can be installed from via ([Figma Plus](https://figmaplus.com)), the plugins manager for Figma.</p>
+<p>Figma Dark UI can be installed from using [Figma Plus](https://figmaplus.com), a 3rd party plugins manager for Figma.</p>
 
 <hr />
 
@@ -25,7 +25,8 @@
 
 <ol>
   <li>Browse Figma Plus menu</li>
-  <li>Click 'Toggle Dark Mode'</li>
+  <li>Click 'Toggle Dark Mode' to activate the Dark Mode</li>
+  <li>The dark theme can be disable either by reloading the page/tab or via the menu button.</li>
 </ol>
 
 <hr />
@@ -35,7 +36,7 @@
 <h4>The rulers' color is still white.</h4>
 <p>At the moment there's no way to change the colors / theme of the rulers on Figma.</p>
 
-<h4>Some UI elements look unstyled.</h4>
+<h4>Some UI elements look unstyled / wrong.</h4>
 <p>If you spot something weird on the UI feel free to shoot us a screenshot and your browser/app information at mirko@papertiger.com</p>
 
 <h3>License</h3>
