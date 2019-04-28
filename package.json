@@ -4,7 +4,7 @@
   "description": "A sleek and beautiful revamp of the existing UI to help you work in low-light condition.",
   "repository": "https://github.com/PaperTiger/figma-dark-ui",
   "author": "Mirko Santangelo <mirko@papertiger.com>, Ahmad Al Haddad <haddad@ah.sa>",
-  "license": "MIT",
+  "license": "CC BY-NC-ND 4.0 License",
   "main": "src/index.js",
   "dependencies": {
     "@babel/runtime": "^7.3.1"

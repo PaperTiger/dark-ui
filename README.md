@@ -41,6 +41,6 @@
 
 <h3>License</h3>
 
-<p>This project is licensed under the MIT License</p>
+<p>This project is licensed under the CC BY-NC-ND 4.0</p>
 
 <h2>For any other issue or question, send us an email at mirko@papertiger.com</h2>
