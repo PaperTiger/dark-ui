@@ -1,9 +1,6 @@
 window = {};
 
-window.App = {
-  getCurrentFileName: () => {}
-};
-
 window.figmaPlus = {
-  createPluginsMenuItem: () => {},
+  addCommand: () => {},
+  fileName: 'Test name',
 }

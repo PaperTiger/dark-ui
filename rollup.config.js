@@ -4,7 +4,6 @@ import resolve from 'rollup-plugin-node-resolve';
 import { uglify } from 'rollup-plugin-uglify';
 import run from 'rollup-plugin-run';
 import serve from 'rollup-plugin-serve'
-import postcss from 'rollup-plugin-postcss'
 import pkg from './package.json'
 import fs from 'fs';
 import { fsizeSync, rmdirsSync } from 'nodejs-fs-utils';
@@ -100,9 +99,6 @@ export default [
 		plugins: [
 			distCleaner(),
 			resolve(),
-			postcss({
-				modules: true,
-			}),
       babel({runtimeHelpers: true,}),
       cjs(),
 			development && RUN && run(), // Dev mode: run the bundle to see output in console/terminal

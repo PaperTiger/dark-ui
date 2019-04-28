@@ -3,6 +3,7 @@ module.exports = function (api) {
   const plugins = [
     "@babel/plugin-transform-runtime",
     "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-regenerator",
     "@babel/plugin-transform-shorthand-properties",
     "@babel/plugin-transform-template-literals",

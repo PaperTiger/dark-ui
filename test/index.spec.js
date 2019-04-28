@@ -3,17 +3,17 @@ import ExamplePlugin from '../src';
 const instance = new ExamplePlugin();
 
 test('it has a name', () => {
-  expect(typeof instance.options[0]).toBe('string');
+  expect(typeof instance.options.title).toBe('string');
 });
 
 test('it has a menu item function', () => {
-  expect(typeof instance.options[1]).toBe('function');
+  expect(typeof instance.options.action).toBe('function');
 });
 
-test('it does not have a condition', () => {
-  expect(instance.options[2]).toBeNull();
+test('it has a windows shortcut', () => {
+  expect(typeof instance.options.shortcut.windows).toBe('object');
 });
 
-test('it has a shortcut', () => {
-  expect(typeof instance.options[3]).toBe('object');
+test('it has a mac shortcut', () => {
+  expect(typeof instance.options.shortcut.mac).toBe('object');
 });

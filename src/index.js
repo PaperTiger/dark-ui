@@ -1,455 +1,346 @@
-const css = `
-// Credits
-// Mirko Santangelo, Papertiger, All Right Reserved
+const propsWithColor = [
+  "color",
+  "backgroundColor",
+  "fill",
+  "stroke",
+  "borderBottomColor",
+  "borderRightColor",
+  "borderLeftColor",
+  "borderTopColor"
+];
 
-::selection {
-  background: #30c2ff;
-  color: white;
-}
+const palette = {
+  panel: "#262829",
+  panelRowOnHover: "#202122",
+  panelRowActive: "#36393c",
+  panelRowChildActive: "#2f3132",
+  panelDivider: "#36383a",
+  text: "#C1C5C9",
+  textCode: "#dcdee0",
+  textActive: "#FFFFFF",
+  textDisabled: "#818688",
+  textDisabledRowActive: "#777c7e",
+  textComponent: "#a694ff",
+  textComponentDisabled: "#5f4fb0",
+  textComponentDisabledRowActive: "#8e82c9",
+  toolbarBg: "#333639",
+  inputFocus: "rgba(255, 255, 255, 0.1)",
+  iconButtonHover: "rgba(255, 255, 255, 0.06)"
+};
 
-.svg-container {
-	fill: white;
-}
+const colorsMap = {
+  "rgb(255, 255, 255)": palette.panel,
+  "rgb(252, 252, 252)": palette.panel,
+  "rgb(248, 248, 248)": palette.panelRowOnHover,
+  "rgb(240, 240, 240)": palette.panelRowOnHover,
+  "rgb(241, 249, 255)": palette.panelRowChildActive,
+  "rgb(237, 245, 250)": palette.panelRowChildActive,
+  "rgb(229, 229, 229)": palette.panelDivider,
+  "rgb(239, 239, 239)": palette.panelDivider,
+  "rgb(217, 217, 217)": palette.panelDivider,
+  "rgb(212, 212, 212)": palette.panelDivider,
+  "rgb(218, 235, 247)": palette.panelRowActive,
+  "rgb(191, 186, 252)": palette.textComponentDisabledRowActive,
+  "rgb(180, 180, 250)": palette.textComponentDisabledRowActive,
+  "rgb(179, 179, 179)": palette.textDisabled,
+  "rgb(166, 172, 175)": palette.textDisabledRowActive,
+  "rgb(123, 97, 255)": palette.textComponent,
+  "rgb(68, 68, 68)": palette.textCode,
+  "rgb(51, 51, 51)": palette.text,
+  "rgb(44, 44, 44)": palette.toolbarBg,
+  "rgb(5, 5, 5)": palette.textActive,
+  "rgb(0, 0, 0)": palette.textActive,
+  "rgba(0, 0, 0, 0.06)": palette.iconButtonHover,
+  "rgba(0, 0, 0, 0.1)": palette.inputFocus,
+  "rgba(0, 0, 0, 0.15)": "rgba(255,255,255, 0.15)",
+  "rgba(0, 0, 0, 0.2)": "rgba(255,255,255, 0.2)",
+  "rgba(0, 0, 0, 0.3)": "rgba(255,255,255, 0.3)",
+  "rgba(0, 0, 0, 0.4)": "rgba(255,255,255, 0.4)",
+  "rgba(0, 0, 0, 0.6)": "rgba(255,255,255, 0.6)",
+  "rgba(0, 0, 0, 0.5)": "rgba(255, 255, 255, 0.5)",
+  "rgba(0, 0, 0, 0.75)": "rgba(255,255,255, 0.75)",
+  "rgba(0, 0, 0, 0.8)": "rgba(255,255,255, 0.8)",
+  "rgba(0, 0, 0, 0.9)": "rgba(255, 255, 255, 0.9)",
+  "rgba(0, 0, 0, 0.95)": "rgba(255, 255, 255, 0.95)",
+  "rgba(44, 44, 44, 0.8)": palette.toolbarBg,
+  "rgba(51, 51, 51, 0.3)": palette.textDisabled,
+  "rgba(123, 97, 255, 0.4)": palette.textComponentDisabled,
+  "rgba(255, 255, 255, 0)": "rgba(0, 0, 0, 0)",
+  "rgba(255, 255, 255, 0.2)": "rgba(0, 0, 0, 0.2)",
+  "rgba(255, 255, 255, 0.4)": "rgba(0, 0, 0, 0.4)",
+  "rgba(255, 255, 255, 0.05)": "rgba(0, 0, 0, 0.05)",
+  "rgba(255, 255, 255, 0.5)": "rgba(0, 0, 0, 0.5)",
+  "rgba(255, 255, 255, 0.8)": "rgba(0, 0, 0, 0.8)",
+  "rgba(255, 255, 255, 0.95)": "rgba(0, 0, 0, 0.95)"
+};
 
-[class*="pageContent-"] {
-  background: #2a2d2d;
-  color: #c1c5c9;
-}
+const selectorsToIgnore = [
+  ".action--unfaded",
+  ".action--enabled",
+  ".avatar--root--2kH_E",
+  ".basic_form--primaryBtn",
+  ".basic_form--greenBtn",
+  ".draggable_modal--backgroundOverlay--CPf6e",
+  ".emoji-mart-anchor-selected",
+  ".flyout_view--flyout",
+  ".folder_view--folderTeamName",
+  ".folder_view--pathSeparator",
+  ".filename_view--title",
+  ".filename_view--pathSeparator",
+  ".fullscreen_menu--searchInput",
+  ".header_modal--modalBackground",
+  ".multilevel_dropdown--optionActive",
+  ".library_item_tile--descriptionPopout",
+  ".transition_preview_pane--",
+  ".top_bar--",
+  ".tooltip--content",
+  ".toolbar_styles--activeButton",
+  ".toolbar_styles--enabledButton",
+  ".user_view--name",
+  ".text--_whiteText",
+  ".team_link--icon",
+  ".zoom_menu--zoomMenu",
+  ".help_widget--helpWidget",
+  ".help_widget--tooltip",
+  ".raw_components--iconButtonSelected"
+];
 
-[class*="team_admin--table"] [class*="lazy_input--lazyInput-"] {
-  background: #262829;
-  color: #c1c5c9;
-}
+const cssOverrides = `
 
-[class*="top_bar--header-"],
-[class*="pages_panel--edgeLine-"],
-[class*="toolbar_view--toolbar-"] {
-  background-color: #262829;
-  border-bottom: 1px solid #161617;
-}
-
-[class*="filename_view--pageTitle"] {
-  background-color: #262829;
-}
-
-[class*="importPrompt-"] {
-  color: #676c70;
-  fill: #676c70;
-}
-
-[class*="library_preferences_modal--toggle-"] {
-  background: #c1c5c9;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 2),
-screen and (min-resolution: 2dppx) {
-  [class*="file_tile--shadowTileBorder-"] {
-    box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.5);
+  // Figma Dark Theme | Brought to you by:
+  // Mirko Santangelo, Papertiger, All Right Reserved
+  
+  .top_bar--header---JfcG,
+  .help_widget--helpWidget--22IIi { 
+      background-color: ${palette.toolbarBg}; 
   }
-}
 
-[class*="scroll_container--trackDragging"] {
-  border-left: 1px solid #262829;
-  background: #33333350;
-}
+  .in_app_page__REFRESH--content--1l70i {
+      background-color: ${palette.panel}; 
+  }
 
-[class*="scroll_container--scrollBar-"]:after {
-  background: #11111180;
-}
+  .option_button--untoggled--2KWMQ:not(.option_button--disabled--YNeqs):hover {
+      box-shadow: inset 0 0 0 1px ${palette.inputFocus};
+  }
 
-[class*="scroll_container--track"]:hover {
-  border-left: 1px solid #1b1c1c;
-  background: #262829;
-}
+  .pages_panel--tabsHeaderBordered--28fYc {
+      box-shadow: 0 1px 0 0 ${palette.panelDivider};
+  }
 
-[class*="left_panel--tabs"] {
-  box-shadow: inset 0 1px 0 0 #1b1c1c;
-}
+  .search--margin24--3oubR .search--searchInput--2JmjM,
+  .search--margin12--3G1pl .search--searchInput--2JmjM,
+  [class*="style_icon--bitmapImage"]:not([class*="style_icon--fillIcon"]),
+  [class*="style_preview_panel--renderedTextStyleThumbnail"] {
+    -webkit-filter: invert(90%);
+    filter: invert(90%);
+  }
 
-[class*="file_browser--navContent-"] {
-  box-shadow: 1px 0 0 0 #1b1c1c;
-}
+  .modal--title--1kOv4,
+  .segmented_control--segmentSelected--3vDJm {
+      fill: ${palette.text};
+      color: ${palette.text};
+  }
 
-[class*="sidebar_library--searchInput"] {
-  color: #c1c5c9;
-}
+  .raw_components--textInput--23_ta:not(:disabled):not(:hover):placeholder-shown {
+      background: linear-gradient(90deg,transparent 6px,rgba(255,255,255,.1) 0);
+      background-size: calc(100% - 6px) 1px;
+      background-position: left bottom -1px;
+      background-repeat: repeat-x;
+  }
 
-[class*="style_icon--bitmapImage"]:not([class*="style_icon--fillIcon"]) {
-  -webkit-filter: invert(90%);
-  filter: invert(90%);
-}
+  .transform_panel--sliderContainer--3SoqU div div {
+      background-color: ${palette.panelDivider};
+  }
 
-[class*="style_preview_panel--preview"] {
-  border-bottom: 1px solid #1b1c1c) !importan;
-  border-top: 1px solid #1b1c1c) !importan;
-}
+  .transform_panel--sliderAnnotationStroke--PBBmO {
+      border-color: ${palette.textDisabled};
+  }
 
-[class*="style_preview_panel--renderedTextStyleThumbnail"] {
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-}
+  .transition_preview_pane--previewPanel--3sZan {
+      background: ${palette.iconButtonHover};
+  }
 
-[class*="style_icon--fillIcon"] [class*="style_icon--bitmapImage"],
-[class*="style_preview_panel--preview"] [class*="style_icon--bitmapImage"],
-[class*="style_preview_panel--preview"]
-[class*="style_preview_panel--renderedFillStyleThumbnail"] {
-  -webkit-filter: none;
-  filter: none;
-}
+  [class*="role_row--select"] {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgOSA2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPiAgICA8ZyBkYXRhLW5hbWU9IkNhbnZhcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIyODEyIC0xMTgwOCkiIGZpbGw9Im5vbmUiPiAgICAgICAgPGcgZGF0YS1uYW1lPSJWZWN0b3IgNyAoU3Ryb2tlKSI+ICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjI4MTIuNiAxMTgwOC42KSI+ICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgwIiBmaWxsPSIjNjY2NjY2IiBmaWxsLW9wYWNpdHk9IjEiLz4gICAgICAgICAgICA8L2c+ICAgICAgICA8L2c+ICAgIDwvZz4gICAgPGRlZnM+ICAgICAgICA8cGF0aCBpZD0icGF0aDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNIDAgMC43MDcxMDdMIDAuNzA3MTA3IDBMIDMuODUzNTUgMy4xNDY0NUwgNyAwTCA3LjcwNzExIDAuNzA3MTA3TCAzLjg1MzU1IDQuNTYwNjZMIDAgMC43MDcxMDdaIi8+ICAgIDwvZGVmcz48L3N2Zz4=);
+  }
 
-[class*="role_row--select"] {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgOSA2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPiAgICA8ZyBkYXRhLW5hbWU9IkNhbnZhcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIyODEyIC0xMTgwOCkiIGZpbGw9Im5vbmUiPiAgICAgICAgPGcgZGF0YS1uYW1lPSJWZWN0b3IgNyAoU3Ryb2tlKSI+ICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjI4MTIuNiAxMTgwOC42KSI+ICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgwIiBmaWxsPSIjNjY2NjY2IiBmaWxsLW9wYWNpdHk9IjEiLz4gICAgICAgICAgICA8L2c+ICAgICAgICA8L2c+ICAgIDwvZz4gICAgPGRlZnM+ICAgICAgICA8cGF0aCBpZD0icGF0aDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNIDAgMC43MDcxMDdMIDAuNzA3MTA3IDBMIDMuODUzNTUgMy4xNDY0NUwgNyAwTCA3LjcwNzExIDAuNzA3MTA3TCAzLjg1MzU1IDQuNTYwNjZMIDAgMC43MDcxMDdaIi8+ICAgIDwvZGVmcz48L3N2Zz4=);
-}
+  [class*="emoji-mart-search"] input,
+  .lazy_input--lazyInput--2kTZE:not(.search--searchInput--2JmjM) {
+      background: ${palette.panel};
+      color: ${palette.text};
+  }
 
-[class*="basic_form--checkbox"]:checked:after {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgdmVyc2lvbj0iMi4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KICAgIHhtbG5zOmZpZ21hPSJodHRwOi8vd3d3LmZpZ21hLmNvbS9maWdtYS9ucyI+DQogICAgPGcgaWQ9IkNhbnZhcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTgwIDQ4MTUpIiBmaWdtYTp0eXBlPSJjYW52YXMiPg0KICAgICAgICA8bWFzayBpZD0ibWFzazBfb3V0bGluZSIgbWFzay10eXBlPSJhbHBoYSI+DQogICAgICAgICAgICA8cGF0aCBkPSINCk0gLTU4MCAtNDgxNQ0KTCAtNTcwIC00ODE1DQpMIC01NzAgLTQ4MDUNCkwgLTU4MCAtNDgwNQ0KTCAtNTgwIC00ODE1DQpaIiBmaWxsPSIjRkZGRkZGIiAvPg0KICAgICAgICA8L21hc2s+DQogICAgICAgIDxnIGlkPSJjaGVjay1nbHlwaCIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOm5vcm1hbDsiIG1hc2s9InVybCgjbWFzazBfb3V0bGluZSkiIGZpZ21hOnR5cGU9ImZyYW1lIj4NCiAgICAgICAgICAgIDxnIGlkPSJjaGVjay1nbHlwaCIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOm5vcm1hbDsiIGZpZ21hOnR5cGU9InZlY3RvciI+DQogICAgICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjcGF0aDBfZmlsbCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU3OS41IC00ODEzKSIgZmlsbD0iI0MxQzVDOSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOm5vcm1hbDsiIC8+DQogICAgICAgICAgICA8L2c+DQogICAgICAgIDwvZz4NCiAgICA8L2c+DQogICAgPGRlZnM+DQogICAgICAgIDxwYXRoIGlkPSJwYXRoMF9maWxsIiBkPSINCk0gMS41IDINCkwgMCAzLjUNCkwgMy41IDcNCkwgOSAxLjUNCkwgNy41IDANCkwgMy41IDQNCkwgMS41IDINCloiIC8+DQogICAgPC9kZWZzPg0KPC9zdmc+);
-  background-position: 50%;
-  background-repeat: no-repeat;
-}
+  .basic_form--primaryBtn--3NqnQ:disabled {
+      color: ${palette.text};
+      background-color: rgba(255,255,255,.3);
+      border-color: rgba(255,255,255,.3);
+  }
 
-[class*="sidebar_library--margin24"] [class*="sidebar_library--searchInput"] {
-  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTcuMzk3NDYgOC4xMDQ1NUM2LjYxODE2IDguNzI5NTUgNS42Mjg0MiA5LjEwMzQ1IDQuNTUxNzYgOS4xMDM0NUMyLjAzODA5IDkuMTAzNDUgMCA3LjA2NTU1IDAgNC41NTE3QzAgMi4wMzc5IDIuMDM4MDkgMCA0LjU1MTc2IDBDNy4wNjU0MyAwIDkuMTAzNTIgMi4wMzc5IDkuMTAzNTIgNC41NTE3QzkuMTAzNTIgNS42Mjg2IDguNzI5NDkgNi42MTgxIDguMTA0NDkgNy4zOTc1MkwxMS4zNTM1IDEwLjY0NjVMMTAuNjQ2IDExLjM1MzZMNy4zOTc0NiA4LjEwNDU1Wk04LjEwMzUyIDQuNTUxN0M4LjEwMzUyIDYuNTEzMzEgNi41MTMxOCA4LjEwMzQ1IDQuNTUxNzYgOC4xMDM0NUMyLjU5MDMzIDguMTAzNDUgMSA2LjUxMzMxIDEgNC41NTE3QzEgMi41OTAxNSAyLjU5MDMzIDEgNC41NTE3NiAxQzYuNTEzMTggMSA4LjEwMzUyIDIuNTkwMTUgOC4xMDM1MiA0LjU1MTdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxIDEpIiBmaWxsPSIjQzFDNUM5IiBmaWxsLW9wYWNpdHk9IjAuNyIvPg0KPC9zdmc+DQo=)
-  no-repeat center left 23px;
-}
+  .sidebar--navDefault--1zbCB,
+  .updates--updateFooter--1JjnE,
+  .library_preferences_modal--slidingPane--2C_Nx {
+      background-color: ${palette.panel};
+  }
 
-[class*="sidebar_library--margin12"] [class*="sidebar_library--searchInput"] {
-  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNy4zOTc0NiA4LjEwNDU1QzYuNjE4MTYgOC43Mjk1NSA1LjYyODQyIDkuMTAzNDUgNC41NTE3NiA5LjEwMzQ1QzIuMDM4MDkgOS4xMDM0NSAwIDcuMDY1NTUgMCA0LjU1MTdDMCAyLjAzNzkgMi4wMzgwOSAwIDQuNTUxNzYgMEM3LjA2NTQzIDAgOS4xMDM1MiAyLjAzNzkgOS4xMDM1MiA0LjU1MTdDOS4xMDM1MiA1LjYyODYgOC43Mjk0OSA2LjYxODEgOC4xMDQ0OSA3LjM5NzUyTDExLjM1MzUgMTAuNjQ2NUwxMC42NDYgMTEuMzUzNkw3LjM5NzQ2IDguMTA0NTVaTTguMTAzNTIgNC41NTE3QzguMTAzNTIgNi41MTMzMSA2LjUxMzE4IDguMTAzNDUgNC41NTE3NiA4LjEwMzQ1QzIuNTkwMzMgOC4xMDM0NSAxIDYuNTEzMzEgMSA0LjU1MTdDMSAyLjU5MDE1IDIuNTkwMzMgMSA0LjU1MTc2IDFDNi41MTMxOCAxIDguMTAzNTIgMi41OTAxNSA4LjEwMzUyIDQuNTUxN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEgMSkiIGZpbGw9IiNDMUM1QzkiIGZpbGwtb3BhY2l0eT0iMC43Ii8+DQo8L3N2Zz4=)
-  no-repeat center left 11px;
-  color: #c1c5c9;
-}
+  .history_view--timeAsLabel--6fKiV {
+      color: ${palette.textDisabled};
+  }
 
-[class*="checkbox--checkbox"]::after,
-[class*="raw_components--modalPanel"] [class*="raw_components--input--"],
-[class*="basic_form--btn"]:not([class*="basic_form--primaryBtn"]),
-[class*="raw_components--input"] {
-  background: #212325;
-  border-color: #1b1c1c;
-}
+  .top_bar--container--1xQEs,
+  .sidebar--navDefault--1zbCB,
+  .top_bar--container--1xQEs {
+     box-shadow: 1px 0 0 0 rgba(255,255,255,.1);
+  }
 
-[class*="emoji-mart-search"] input {
-  color: #c1c5c9;
-  background: #262829;
-}
+  .linkified {
+      color: #30c2ff;
+  }
 
-[class*="constraints_panel--centerX"],
-[class*="constraints_panel--centerY"],
-[class*="constraints_panel--selectorContainer"] {
-  border-color: #525558;
-}
+  .emoji-mart-category-label span {
+      background-color: transparent;
+      color: ${palette.textActive};
+  }
 
-[class*="constraints_panel--centerX"],
-[class*="constraints_panel--centerY"],
-[class*="constraints_panel--selectorContainer"] {
-  border-color: #525558;
-}
+  .full_width_page--fullWidthPage--Fg4oT {
+      color: ${palette.text};
+  }
 
-[class*="constraints_panel--bottom--"]:not([class*="constraints_panel--selected"])::after,
-[class*="constraints_panel--left--"]:not([class*="constraints_panel--selected"])::after,
-[class*="constraints_panel--centerX--"]:not([class*="constraints_panel--selected"])::after,
-[class*="constraints_panel--centerY--"]:not([class*="constraints_panel--selected"])::after,
-[class*="constraints_panel--right--"]:not([class*="constraints_panel--selected"])::after,
-[class*="constraints_panel--top--"]:not([class*="constraints_panel--selected"])::after {
-  background: #525558;
-}
-
-[class*="comments_list--activeComment"]
-[class*="comments_list--commentMessage"],
-[class*="comments_list--activeComment"][class*="comments_list--hovered"]
-[class*="comments_list--commentMessage"],
-[class*="comments_list--activeComment"]:hover
-[class*="comments_list--commentMessage"] {
-  color: #333536;
-}
-
-[class*="object_row--selected"] [class*="object_row--input"] {
-  color: #333536;
-}
-
-
-[class*="sidebar--searchBox"] {
-  background: #212325;
-}
-
-input[type=text]::placeholder {
-  color: #676C70;
-}
-
-[class*="file_tile--settings"] {
-  opacity: 1;
-}
+  .team_admin--backToFiles--3tTyp {
+      border-color: rgba(255,255,255,.15);
+  }
 `;
 
 export default class DarkUIPlugin {
   constructor() {
-    this.enabled = localStorage.getItem("figma-dark-ui-plugin-enabled", false);
+    const { figmaPlus } = window;
 
-    this.options = [
-      "Toggle Dark Mode",
-      this.toggleDarkUI.bind(this),
-      null,
-      null
-    ];
+    this.options = {
+      title: "Toggle Dark Theme",
+      action: this.toggleTheme().bind(this)
+    };
 
-    window.figmaPlus.createPluginsMenuItem(...this.options);
+    window.figmaPlus.addCommand(this.options);
+
+    this.enabled = localStorage.getItem("figma-dark-ui-plugin-enabled", true);
 
     if (this.enabled) {
-      this.toggleDarkUI();
+      this.toggleTheme();
     }
   }
 
-  toggleDarkUI() {
-    const palette = {
-      bgLightest: "#676C70",
-      bgLight: "#333536",
-      bgBase: "#262829",
-      bgDark: "#1B1C1C",
-      bgActive: "#30c2ff",
-      txtLabelSection: "#EBF0F5",
-      txtLabel: "#C1C5C9",
-      txtDisabled: "#525558",
-      txtSymbol: "#907cff",
-      stActivePressed: "#25b5f1"
-    };
+  toggleTheme() {
+    let themeIsActive = document.getElementById("f-ui");
 
-    if (document.getElementById("f-ui") === null) {
-      let style = document.createElement("style");
-      let cssNode = document.createTextNode(css);
+    if (themeIsActive) {
+      localStorage.removeItem("figma-dark-ui-plugin-enabled");
+      this.destroy();
 
-      style.id = "f-ui";
-      style.appendChild(cssNode);
+      return;
+    }
 
-      setTheme();
+    localStorage.setItem("figma-dark-ui-plugin-enabled", true);
+    this.init();
+  }
 
-      document.head.appendChild(style);
-      localStorage.setItem("figma-dark-ui-plugin-enabled", true);
-    } else {
+  init() {
+    let style = document.createElement("style"),
+      cssNode = document.createTextNode(cssOverrides);
+
+    style.id = "f-ui";
+    style.appendChild(cssNode);
+
+    document.head.appendChild(style);
+
+    this.mapColorsToRules();
+
+    console.log("[DARKUI] Done");
+  }
+
+  destroy() {
+    let confirmMessage =
+      "Figma needs a refresh in order to restore the default theme. Continue?";
+
+    if (confirm(confirmMessage)) {
+      localStorage.removeItem("figma-dark-ui-plugin-enabled");
+
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
+  }
+
+  getCoreStylesheet() {
+    let css = document.styleSheets,
+      coreStylesheet;
+
+    Object.keys(css).forEach(key => {
+      let cssFileUrl = css[key].href;
+
+      if (cssFileUrl && cssFileUrl.includes("figma_app")) {
+        coreStylesheet = css[key].cssRules;
+      }
+    });
+
+    return coreStylesheet;
+  }
+
+  getCoreUIColor(cssRule) {
+    propsWithColor.forEach(prop => {
+      let colorValue = cssRule.style[prop];
+
+      if (colorValue != "") {
+        if (!this.figmaColors.hasOwnProperty(colorValue)) {
+          this.figmaColors[colorValue] = null;
+        }
+      }
+    });
+  }
+
+  mapColorsToRules() {
+    this.figmaColors = {};
+
+    let figmaCoreStylesheet = this.getCoreStylesheet();
+
+    for (let cssRule of figmaCoreStylesheet) {
       if (
-        confirm(
-          "Figma needs a refresh in order to restore the default theme. Continue?"
-        )
+        cssRule.selectorText != undefined &&
+        this.isRuleIgnored(cssRule.selectorText) == false
       ) {
-        localStorage.removeItem("figma-dark-ui-plugin-enabled");
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
-      }
-    }
+        if (
+          (cssRule.style != undefined && cssRule.style.color != "") ||
+          cssRule.style.backgroundColor != "" ||
+          cssRule.style.fill != "" ||
+          cssRule.style.stroke != "" ||
+          cssRule.style.borderBottomColor != "" ||
+          cssRule.style.borderRightColor != "" ||
+          cssRule.style.borderTopColor != "" ||
+          cssRule.style.borderLeftColor != ""
+        ) {
+          propsWithColor.forEach(colorProp => {
+            let colorValue = cssRule.style[colorProp];
 
-    function setTheme() {
-      let css = "";
-      const cssStack = document.styleSheets;
+            if (colorValue != "" && colorsMap.hasOwnProperty(colorValue)) {
+              cssRule.style[colorProp] = colorsMap[colorValue];
+            }
+          });
 
-      Object.keys(cssStack).forEach(key => {
-        let cssName = cssStack[key].href;
-
-        if (cssName && cssName.includes("figma_app")) {
-          css = cssStack[key];
-        }
-      });
-
-      const rules = css.cssRules;
-
-      for (let item of rules) {
-        if (item.style != undefined) {
-          changeTextColor(item);
-          changeBackground(item);
-          changeFill(item);
-          changeStroke(item);
-          changeBorderBottomColor(item);
-          changeBorderRightColor(item);
-          changeBorderLeftColor(item);
-          changeBorderTopColor(item);
+          // Utility to get Colors used in Figma
+          this.getCoreUIColor(cssRule);
         }
       }
     }
+  }
 
-    function changeTextColor(item) {
-      if (item.style.color != "") {
-        switch (item.style.color) {
-          case "rgb(0, 0, 0)":
-            item.style.color = palette.txtLabelSection;
-            break;
-          case "rgba(0, 0, 0, 0.5)":
-            item.style.color = palette.bgLightest;
-            break;
-          case "rgb(5, 5, 5)":
-            item.style.color = palette.txtLabelSection;
-            break;
-          case "rgb(44, 44, 44)":
-            item.style.color = palette.txtLabel;
-            break;
-          case "rgb(68, 68, 68)":
-            item.style.color = palette.txtLabel;
-            break;
-          case "rgba(68, 68, 68, 0.3)":
-            item.style.color = palette.txtDisabled;
-            break;
-          case "rgb(170, 170, 170)":
-            item.style.color = palette.bgLightest;
-            break;
-          case "rgb(212, 212, 212)":
-            item.style.color = palette.bgLightest;
-            break;
-        }
-      }
-    }
+  isRuleIgnored(selector) {
+    let isMatch = false;
 
-    function changeBackground(item) {
-      if (item.style.backgroundColor != "") {
-        switch (item.style.backgroundColor) {
-          case "rgb(44, 44, 44)":
-            item.style.backgroundColor = palette.bgLight;
-            break;
-          case "rgb(212, 212, 212)":
-            item.style.backgroundColor = palette.bgLight;
-            break;
-          case "rgb(229, 229, 229)":
-            item.style.backgroundColor = palette.bgDark;
-            break;
-          case "rgb(239, 239, 239)":
-            item.style.backgroundColor = palette.bgLight;
-            break;
-          case "rgb(248, 248, 248)":
-            item.style.backgroundColor = palette.bgBase;
-            break;
-          case "rgb(252, 252, 252)":
-            item.style.backgroundColor = palette.bgBase;
-            break;
-          case "rgb(255, 255, 255)":
-          case "#FFF":
-          case "rgba(255, 255, 255, 0.95)":
-          case "rgba(255, 255, 255, 0.953)":
-            item.style.backgroundColor = palette.bgBase;
-            break;
-        }
+    selectorsToIgnore.forEach(query => {
+      if (selector.includes(query)) {
+        isMatch = true;
       }
-    }
+    });
 
-    function changeFill(item) {
-      if (item.style.fill != "") {
-        switch (item.style.fill) {
-          case "rgb(0, 0, 0)":
-            item.style.fill = palette.txtLabelSection;
-            break;
-          case "rgb(5, 5, 5)":
-            item.style.fill = palette.txtLabelSection;
-            break;
-          case "rgb(44, 44, 44)":
-            item.style.fill = palette.txtLabelSection;
-            break;
-          case "rgb(68, 68, 68)":
-            item.style.fill = palette.txtLabelSection;
-            break;
-          case "hsla(0,0%,67%,0.3)":
-            item.style.fill = palette.txtDisabled;
-            break;
-          case "rgb(170, 170, 170)":
-            item.style.fill = palette.bgLightest;
-            break;
-          case "rgb(212, 212, 212)":
-            item.style.fill = palette.bgLightest;
-            break;
-          case "rgb(229, 229, 229)":
-            item.style.fill = palette.bgDark;
-            break;
-          case "rgb(239, 239, 239)":
-            item.style.fill = palette.bgLight;
-            break;
-          case "rgb(252, 252, 252)":
-            item.style.fill = palette.bgBase;
-            break;
-        }
-      }
-    }
-
-    function changeStroke(item) {
-      if (item.style.stroke != "") {
-        switch (item.style.stroke) {
-          case "rgb(170, 170, 170)":
-            item.style.stroke = palette.bgLightest;
-            break;
-        }
-      }
-    }
-
-    function changeBorderBottomColor(item) {
-      if (item.style.borderBottomColor != "") {
-        switch (item.style.borderBottomColor) {
-          case "rgb(239, 239, 239)":
-            item.style.borderBottomColor = palette.bgDark;
-            break;
-          case "rgb(212, 212, 212)":
-            item.style.borderBottomColor = palette.bgDark;
-            break;
-          case "rgb(217, 217, 217)":
-            item.style.borderBottomColor = palette.bgDark;
-            break;
-          case "rgb(229, 229, 229)":
-            item.style.borderBottomColor = palette.bgDark;
-            break;
-        }
-      }
-    }
-
-    function changeBorderRightColor(item) {
-      if (item.style.borderRightColor != "") {
-        switch (item.style.borderRightColor) {
-          case "rgb(239, 239, 239)":
-            item.style.borderRightColor = palette.bgDark;
-            break;
-          case "rgb(212, 212, 212)":
-            item.style.borderRightColor = palette.bgDark;
-            break;
-          case "rgb(217, 217, 217)":
-            item.style.borderRightColor = palette.bgDark;
-            break;
-          case "rgb(229, 229, 229)":
-            item.style.borderRightColor = palette.bgDark;
-            break;
-        }
-      }
-    }
-
-    function changeBorderLeftColor(item) {
-      if (item.style.borderLeftColor != "") {
-        switch (item.style.borderLeftColor) {
-          case "rgb(239, 239, 239)":
-            item.style.borderLeftColor = palette.bgDark;
-            break;
-          case "rgb(212, 212, 212)":
-            item.style.borderLeftColor = palette.bgDark;
-            break;
-          case "rgb(217, 217, 217)":
-            item.style.borderLeftColor = palette.bgDark;
-            break;
-          case "rgb(229, 229, 229)":
-            item.style.borderLeftColor = palette.bgDark;
-            break;
-        }
-      }
-    }
-
-    function changeBorderTopColor(item) {
-      if (item.style.borderTopColor != "") {
-        switch (item.style.borderTopColor) {
-          case "rgb(212, 212, 212)":
-            item.style.borderTopColor = palette.bgDark;
-            break;
-          case "rgb(217, 217, 217)":
-            item.style.borderTopColor = palette.bgDark;
-            break;
-          case "rgb(229, 229, 229)":
-            item.style.borderTopColor = palette.bgDark;
-            break;
-          case "rgb(239, 239, 239)":
-            item.style.borderTopColor = palette.bgDark;
-            break;
-          case "rgb(252, 252, 252)":
-            item.style.borderTopColor = palette.bgBase;
-            break;
-        }
-      }
-    }
+    return isMatch;
   }
 }
 
