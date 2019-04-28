@@ -5,7 +5,7 @@
 <hr />
 
 <p>
-  <img src="https://user-images.githubusercontent.com/1207863/53418477-f78e3a00-39e8-11e9-99bf-0d2eef50fb53.jpg" />
+  <img src="https://raw.githubusercontent.com/PaperTiger/figma-dark-ui/master/preview.jpg" />
 </p>
 
 <h3>Features</h3>
