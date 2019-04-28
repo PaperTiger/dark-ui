@@ -1,6 +1,6 @@
 <h1>Figma - Dark UI</h1>
 
-<p>Join the Dark Side — A sleek and beautiful revamp of the existing UI to help you work in low-light condition.</p>
+<p>Join the Dark Side of Figma — A sleek and beautiful revamp of the existing UI to help you work in low-light condition.</p>
 
 <hr />
 
