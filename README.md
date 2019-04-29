@@ -44,3 +44,7 @@
 <p>This project is licensed under the CC BY-NC-ND 4.0</p>
 
 <h2>For any other issue or question, send us an email at mirko@papertiger.com</h2>
+
+<hr>
+
+Special thanks to [@cdes](https://github.com/cdes/) for the amazing FigmaPlus Plugin Boilerplate.
