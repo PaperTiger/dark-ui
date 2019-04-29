@@ -89,7 +89,7 @@ const selectorsToIgnore = [
   ".filename_view--pathSeparator",
   ".fullscreen_menu--searchInput",
   ".header_modal--modalBackground",
-  ".multilevel_dropdown--optionActive",
+  ".multilevel_dropdown--option",
   ".library_item_tile--descriptionPopout",
   ".transition_preview_pane--",
   ".top_bar--",
@@ -102,7 +102,8 @@ const selectorsToIgnore = [
   ".zoom_menu--zoomMenu",
   ".help_widget--helpWidget",
   ".help_widget--tooltip",
-  ".raw_components--iconButtonSelected"
+  ".raw_components--iconButtonSelected",
+  ".visual_bell"
 ];
 
 const cssOverrides = `
@@ -110,9 +111,9 @@ const cssOverrides = `
   // Figma Dark Theme | Brought to you by:
   // Mirko Santangelo, Papertiger, All Right Reserved
   
-  .top_bar--header---JfcG,
+  .top_bar--header---JfcG,top_bar--header---JfcG
   .help_widget--helpWidget--22IIi { 
-      background-color: ${palette.toolbarBg}; 
+      background: ${palette.toolbarBg}; 
   }
 
   .in_app_page__REFRESH--content--1l70i {
@@ -214,31 +215,6 @@ export default class DarkUIPlugin {
   constructor() {
     const { figmaPlus } = window;
 
-    this.options = {
-      title: "Toggle Dark Theme",
-      action: this.toggleTheme().bind(this)
-    };
-
-    window.figmaPlus.addCommand(this.options);
-
-    this.enabled = localStorage.getItem("figma-dark-ui-plugin-enabled", true);
-
-    if (this.enabled) {
-      this.toggleTheme();
-    }
-  }
-
-  toggleTheme() {
-    let themeIsActive = document.getElementById("f-ui");
-
-    if (themeIsActive) {
-      localStorage.removeItem("figma-dark-ui-plugin-enabled");
-      this.destroy();
-
-      return;
-    }
-
-    localStorage.setItem("figma-dark-ui-plugin-enabled", true);
     this.init();
   }
 
@@ -253,20 +229,7 @@ export default class DarkUIPlugin {
 
     this.mapColorsToRules();
 
-    console.log("[DARKUI] Done");
-  }
-
-  destroy() {
-    let confirmMessage =
-      "Figma needs a refresh in order to restore the default theme. Continue?";
-
-    if (confirm(confirmMessage)) {
-      localStorage.removeItem("figma-dark-ui-plugin-enabled");
-
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
-    }
+    console.log("[DARKUI] Welcome to the dark side.");
   }
 
   getCoreStylesheet() {
