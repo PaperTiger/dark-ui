@@ -105,7 +105,8 @@ const selectorsToIgnore = [
   ".help_widget--helpWidget",
   ".help_widget--tooltip",
   ".raw_components--iconButtonSelected",
-  ".visual_bell"
+  ".visual_bell",
+  ".zoom_menu"
 ];
 
 const cssOverrides = `
