@@ -230,6 +230,8 @@ const cssOverrides = `
 	    color: rgba(255,255,255,.8);
 	}
   
+  .scriptRunner .prism-editor__code,
+  .modal-header,  
   .header h1,
   .section h2,
   .empty-state-title,
@@ -242,12 +244,20 @@ const cssOverrides = `
   .js-list .path {
 		color:white;
   }
+
+  code[class*=language-], pre[class*=language-] {
+    text-shadow:none;
+  }
   
   .description {
     color: ${palette.text};
   }
   
-  .modal-content input:hover, .modal-content textarea:hover, .tab-content input:hover, .tab-content textarea:hover {
+  .scriptRunner .prism-editor__code:hover,
+  .modal-content input:hover, 
+  .modal-content textarea:hover, 
+  .tab-content input:hover, 
+  .tab-content textarea:hover {
     border-color: ${palette.inputFocus};
   }
   
