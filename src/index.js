@@ -110,8 +110,8 @@ const selectorsToIgnore = [
 
 const cssOverrides = `
 
-  // Figma Dark Theme | Brought to you by:
-  // Mirko Santangelo, Papertiger, All Right Reserved
+  /* Figma Dark Theme | Brought to you by:
+     Mirko Santangelo, Papertiger, All Right Reserved */
   
   .top_bar--header---JfcG,top_bar--header---JfcG
   .help_widget--helpWidget--22IIi { 
@@ -210,6 +210,77 @@ const cssOverrides = `
 
   .team_admin--backToFiles--3tTyp {
       border-color: rgba(255,255,255,.15);
+  }
+
+  /* Figma Plus Overrides */
+
+  .v--modal.v--modal-box,
+  #pluginManager .modal-content,
+  .detail-screen,
+  .developer-screen {
+		background: ${palette.panel};
+	}
+	
+	.modal-tab-large {
+		color: rgba(255,255,255,.3);
+	}
+	
+	.modal-tab-large:hover {
+	    color: rgba(255,255,255,.8);
+	}
+  
+  .header h1,
+  .section h2,
+  .empty-state-title,
+  .modal-content input,
+  .pluginItem .name,
+  .modal-tab-large.active-tab,
+  .detail-screen .name,
+  .detail-screen .section-title,
+  .version .version-number,
+  .js-list .path {
+		color:white;
+  }
+  
+  .description {
+    color: ${palette.text};
+  }
+  
+  .modal-content input:hover, .modal-content textarea:hover, .tab-content input:hover, .tab-content textarea:hover {
+    border-color: ${palette.inputFocus};
+  }
+  
+  .js-list,
+  .modal-header,
+  .search-box,
+  .detail-screen .header, 
+  .detail-screen .org-header {
+	    border-bottom: 1px solid ${palette.panelDivider};
+	}
+  
+  .modal-header .modal-close-button,
+  .figma-icon, .figma-icon-button,
+  .detail-screen .back-button.figma-icon.chevron-left:after {
+		fill:white;
+		color:white;
+  }
+  
+  .modal-content button, .tab-content button {
+    color: white;
+    border-color:white;
+  }
+
+  .pluginItem:hover {
+    background: ${palette.panelRowOnHover};
+    color: white;
+  }
+
+  .detail-screen .v-carousel-dot.active {
+    background: white;
+  }
+
+  .detail-screen .v-carousel-dot {
+    background: rgba(255,255,255,0.25);
   }
 `;
 
