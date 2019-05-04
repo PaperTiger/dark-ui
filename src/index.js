@@ -77,6 +77,7 @@ const colorsMap = {
 const selectorsToIgnore = [
   ".action--unfaded",
   ".action--enabled",
+  ".action_option",
   ".avatar--root--2kH_E",
   ".basic_form--primaryBtn",
   ".basic_form--greenBtn",
@@ -91,9 +92,10 @@ const selectorsToIgnore = [
   ".header_modal--modalBackground",
   ".multilevel_dropdown--option",
   ".library_item_tile--descriptionPopout",
+  ".pointing_dropdown",
   ".transition_preview_pane--",
   ".top_bar--",
-  ".tooltip--content",
+  ".tooltip--",
   ".toolbar_styles--activeButton",
   ".toolbar_styles--enabledButton",
   ".user_view--name",
@@ -226,6 +228,7 @@ export default class DarkUIPlugin {
     style.appendChild(cssNode);
 
     document.head.appendChild(style);
+    document.body.classList.add("has-dark-theme");
 
     this.mapColorsToRules();
 
