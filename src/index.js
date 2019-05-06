@@ -113,7 +113,15 @@ const cssOverrides = `
 
   /* Figma Dark Theme | Brought to you by:
      Mirko Santangelo, Papertiger, All Right Reserved */
-  
+		 
+	body {
+		color: ${palette.text};
+	}
+	
+	input {
+		color: ${palette.text} !important;
+	}
+	
   .top_bar--header---JfcG,top_bar--header---JfcG
   .help_widget--helpWidget--22IIi { 
       background: ${palette.toolbarBg}; 
@@ -162,7 +170,11 @@ const cssOverrides = `
 
   .transition_preview_pane--previewPanel--3sZan {
       background: ${palette.iconButtonHover};
-  }
+	}
+	
+	.type_settings--lineHeightUpdateLine--2Rjxz {
+			background-color: ${palette.panelDivider};
+	}
 
   [class*="role_row--select"] {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgOSA2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPiAgICA8ZyBkYXRhLW5hbWU9IkNhbnZhcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIyODEyIC0xMTgwOCkiIGZpbGw9Im5vbmUiPiAgICAgICAgPGcgZGF0YS1uYW1lPSJWZWN0b3IgNyAoU3Ryb2tlKSI+ICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjI4MTIuNiAxMTgwOC42KSI+ICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgwIiBmaWxsPSIjNjY2NjY2IiBmaWxsLW9wYWNpdHk9IjEiLz4gICAgICAgICAgICA8L2c+ICAgICAgICA8L2c+ICAgIDwvZz4gICAgPGRlZnM+ICAgICAgICA8cGF0aCBpZD0icGF0aDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNIDAgMC43MDcxMDdMIDAuNzA3MTA3IDBMIDMuODUzNTUgMy4xNDY0NUwgNyAwTCA3LjcwNzExIDAuNzA3MTA3TCAzLjg1MzU1IDQuNTYwNjZMIDAgMC43MDcxMDdaIi8+ICAgIDwvZGVmcz48L3N2Zz4=);
@@ -221,7 +233,19 @@ const cssOverrides = `
   .developer-screen {
 		background: ${palette.panel};
 	}
-	
+
+	.modal-tabs {
+		border-bottom-color: ${palette.panelDivider};
+	}
+
+	.modal-tab {
+		color: ${palette.textDisabled};
+	}
+
+	.modal-tab.active, .modal-tab:hover {
+		color: ${palette.text};
+	}
+
 	.modal-tab-large {
 		color: rgba(255,255,255,.3);
 	}
@@ -279,6 +303,16 @@ const cssOverrides = `
   .modal-content button, .tab-content button {
     color: white;
     border-color:white;
+	}
+
+	.modal-content button:disabled, .tab-content button:disabled, .modal-content button.primary:disabled, .tab-content button.primary:disabled {
+    color: ${palette.text};
+    background-color: rgba(255,255,255,.3);
+    border-color: rgba(255,255,255,.3);
+	}
+	
+	.modal-content input, .tab-content input, .modal-content textarea, .tab-content textarea, .modal-content label, .modal-content label {
+    color: ${palette.text};
   }
 
   .pluginItem:hover {
@@ -292,7 +326,11 @@ const cssOverrides = `
 
   .detail-screen .v-carousel-dot {
     background: rgba(255,255,255,0.25);
-  }
+	}
+	
+	.figma-icon {
+		color: ${palette.text} !important;
+	}
 `;
 
 export default class DarkUIPlugin {
