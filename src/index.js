@@ -112,7 +112,7 @@ const selectorsToIgnore = [
 const cssOverrides = `
 
   /* Figma Dark Theme | Brought to you by:
-		 Mirko Santangelo, Papertiger, All Right Reserved */
+     Mirko Santangelo, Papertiger, All Right Reserved */
 		 
 	body {
 		color: ${palette.text};
