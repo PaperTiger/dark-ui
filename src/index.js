@@ -364,7 +364,7 @@ export default class DarkUIPlugin {
 
   init() {
     let style = document.createElement("style"),
-        cssNode = document.createTextNode(cssOverrides);
+      cssNode = document.createTextNode(cssOverrides);
 
     style.id = "figma-dark-mode";
     style.appendChild(cssNode);
@@ -374,7 +374,10 @@ export default class DarkUIPlugin {
 
     this.mapColorsToRules();
 
-    console.log("%c[DARKUI] Welcome to the dark side. By MKS. ☠️ ", "color: white; background-color: black; font-size: 18px;");
+    console.log(
+      "%c[DARKUI] Welcome to the dark side. By MKS. ☠️ ",
+      "color: white; background-color: black; font-size: 18px;"
+    );
   }
 
   getCoreStylesheet() {
