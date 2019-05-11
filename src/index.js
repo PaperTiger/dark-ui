@@ -81,6 +81,8 @@ const selectorsToIgnore = [
   ".avatar--root--2kH_E",
   ".basic_form--primaryBtn",
   ".basic_form--greenBtn",
+  ".dropdown--dropdown",
+  ".dropdown_menu",
   ".draggable_modal--backgroundOverlay--CPf6e",
   ".emoji-mart-anchor-selected",
   ".flyout_view--flyout",
@@ -88,11 +90,17 @@ const selectorsToIgnore = [
   ".folder_view--pathSeparator",
   ".filename_view--title",
   ".filename_view--pathSeparator",
+  ".filename_view--dropdownOption",
   ".fullscreen_menu--searchInput",
   ".header_modal--modalBackground",
-  ".multilevel_dropdown--option",
+  ".header--header--",
+  ".header--settings",
+  ".header--dropdownCaret",
+  ".prototype--background",
+  ".multilevel_dropdown--",
   ".library_item_tile--descriptionPopout",
   ".pointing_dropdown",
+  ".scaling_menu--",
   ".transition_preview_pane--",
   ".top_bar--",
   ".tooltip--",
@@ -114,6 +122,7 @@ const cssOverrides = `
   /* Figma Dark Theme | Brought to you by:
      Mirko Santangelo, Papertiger, All Right Reserved */
   
+  .header--header--3d0kA,
   .top_bar--header---JfcG,top_bar--header---JfcG
   .help_widget--helpWidget--22IIi { 
       background: ${palette.toolbarBg}; 
@@ -131,13 +140,18 @@ const cssOverrides = `
       box-shadow: 0 1px 0 0 ${palette.panelDivider};
   }
 
-  .search--margin24--3oubR .search--searchInput--2JmjM,
-  .search--margin12--3G1pl .search--searchInput--2JmjM,
-  [class*="style_icon--bitmapImage"]:not([class*="style_icon--fillIcon"]),
-  [class*="style_preview_panel--renderedTextStyleThumbnail"] {
+  .style_preview_panel--renderedTextStyleThumbnail--Mtiav, 
+  .style_icon--styleIcon--3-PzQ:not(.style_icon--fillIcon--2kZ-_) img {
     -webkit-filter: invert(90%);
     filter: invert(90%);
   }
+
+  .search--margin24--3oubR .search--searchInput--2JmjM,
+  .search--margin12--3G1pl .search--searchInput--2JmjM {
+    color: ${palette.text};
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjM5NzQ2IDguMTA0NTVDNi42MTgxNiA4LjcyOTU1IDUuNjI4NDIgOS4xMDM0NSA0LjU1MTc2IDkuMTAzNDVDMi4wMzgwOSA5LjEwMzQ1IDAgNy4wNjU1NSAwIDQuNTUxN0MwIDIuMDM3OSAyLjAzODA5IDAgNC41NTE3NiAwQzcuMDY1NDMgMCA5LjEwMzUyIDIuMDM3OSA5LjEwMzUyIDQuNTUxN0M5LjEwMzUyIDUuNjI4NiA4LjcyOTQ5IDYuNjE4MSA4LjEwNDQ5IDcuMzk3NTJMMTEuMzUzNSAxMC42NDY1TDEwLjY0NiAxMS4zNTM2TDcuMzk3NDYgOC4xMDQ1NVpNOC4xMDM1MiA0LjU1MTdDOC4xMDM1MiA2LjUxMzMxIDYuNTEzMTggOC4xMDM0NSA0LjU1MTc2IDguMTAzNDVDMi41OTAzMyA4LjEwMzQ1IDEgNi41MTMzMSAxIDQuNTUxN0MxIDIuNTkwMTUgMi41OTAzMyAxIDQuNTUxNzYgMUM2LjUxMzE4IDEgOC4xMDM1MiAyLjU5MDE1IDguMTAzNTIgNC41NTE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSAxKSIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC43Ii8+PC9zdmc+) no-repeat center left 16px;
+  }
+
 
   .modal--title--1kOv4,
   .segmented_control--segmentSelected--3vDJm {
@@ -213,7 +227,7 @@ const cssOverrides = `
       border-color: rgba(255,255,255,.15);
   }
 
-  /* Figma Plus Overrides */
+  /* Figma Plus Overrides ----------------------------------- */
 
   .v--modal.v--modal-box,
   #pluginManager .modal-content,
@@ -247,6 +261,14 @@ const cssOverrides = `
 
   code[class*=language-], pre[class*=language-] {
     text-shadow:none;
+  }
+
+  .language-css .token.string, 
+  .style .token.string, 
+  .token.entity, 
+  .token.operator, 
+  .token.url {
+    background: transparent;
   }
   
   .description {
@@ -304,9 +326,9 @@ export default class DarkUIPlugin {
 
   init() {
     let style = document.createElement("style"),
-      cssNode = document.createTextNode(cssOverrides);
+        cssNode = document.createTextNode(cssOverrides);
 
-    style.id = "f-ui";
+    style.id = "figma-dark-mode";
     style.appendChild(cssNode);
 
     document.head.appendChild(style);
@@ -314,7 +336,7 @@ export default class DarkUIPlugin {
 
     this.mapColorsToRules();
 
-    console.log("[DARKUI] Welcome to the dark side.");
+    console.log("%c[DARKUI] Welcome to the dark side. By MKS. ☠️ ", "color: white; background-color: black; font-size: 18px;");
   }
 
   getCoreStylesheet() {
